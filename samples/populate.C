@@ -18,16 +18,23 @@ int main(int argc, char **argv){
 	cv::Mat input = cv::imread(argv[1]);
 	cv::Mat disp = cv::imread(argv[2], CV_LOAD_IMAGE_GRAYSCALE);
 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr pc(new pcl::PointCloud<pcl::PointXYZRGB>);
+
+	if(argc < 7){
+		fprintf(stderr, "Enter all required parameters in order: Focal Length, Baseline, Principle point x, Principle Point y\n");
+		return 0;
+	}
 	
-	double focal = 1216.0089;    //float(argv[3])
-        double baseline = 357.8112;        //float(argv[4])
-        double cu = 672.9872;      //float(argv[5])
-        double cv = 265.3183;      //float(argv[6])
-        int i = 0;
+	double focal;
+        double baseline;
+        double cu;
+        double cv;
+	focal = atof(argv[3]);
+	baseline = atof(argv[4]);
+	cu = atof(argv[5]);
+	cv = atof(argv[6]);
         for(double R = 0; R< input.rows; R++){
 		for(double C = 0; C < input.cols; C++)
 		{
-                        i++;
 			double d = disp.at<uchar>(R, C);
 			//cout << d << endl;
                         //if(d < 100) continue;
