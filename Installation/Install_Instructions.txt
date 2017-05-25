@@ -1,3 +1,38 @@
+*********
+* CMake *
+*********
+
+-------------------
+Linux Instructions:
+-------------------
+	Step 1). Launch a web browser and navigate to https://cmake.org/download/
+
+	Step 2). Navigate to the "Linux x86_64" row under the "Platforms" section.
+
+	Step 3). Download the cmake-3.8.1-Linux-x86_64.sh file
+
+	Step 4). Navigate to the folder you downloaded the file in step 3 to using Terminal
+
+	Step 5). Execute the .sh file
+		bash cmake-3.8.1-Linux-x86_64.sh
+	
+Please note: The terminal command in Step 5 assumes you are using Ubuntu. If you are using a different Linux distrubution, 
+	   replace "bash" with whatever command your Linux distribution uses to execute .sh files 
+
+---------------------
+Mac OSX Instructions:
+---------------------	
+	Step 1). Launch a web browser and navigate to https://cmake.org/download/
+
+	Step 2). Navigate to the "Mac OSX 10.6 or Later" row under the "Platforms" section.
+
+	Step 3). Download the cmake-3.8.1-Darwin-x86_64.dmg file
+
+	Step 4). Navigate to the folder you downloaded the file in step 3.
+
+	Step 5). Execute the file you downloaded in step 3
+		If using a visual file system, you can simply single click the .dmg file twice
+
 **********
 * OpenCV *
 **********
