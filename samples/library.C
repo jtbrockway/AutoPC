@@ -1,6 +1,6 @@
 #include <assert.h>
 #include <iostream>
-#include <pcl/visualization/cloud_viewer.h>
+#include <pcl/visualization/pcl_visualizer.h>
 #include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
 #include <stdio.h>
@@ -14,6 +14,10 @@
 #include <opencv2/highgui/highgui.hpp>
 #include "elas.h"
 #include "image.h"
+#include <pcl/console/parse.h>
+#include <boost/thread/thread.hpp>\
+
+
 
 using namespace cv;
 using namespace std;
@@ -149,6 +153,60 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
   free(D2_data);
 }
 
+
+boost::shared_ptr<pcl::visualization::PCLVisualizer> rgbVis (pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr cloud)
+{
+  // --------------------------------------------
+  // -----Open 3D viewer and add point cloud-----
+  // --------------------------------------------
+  boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer (new pcl::visualization::PCLVisualizer ("3D Viewer"));
+  viewer->setBackgroundColor (0, 0, 0);
+  pcl::visualization::PointCloudColorHandlerRGBField<pcl::PointXYZRGB> rgb(cloud);
+  viewer->addPointCloud<pcl::PointXYZRGB> (cloud, rgb, "sample cloud");
+  viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3, "sample cloud");
+  viewer->addCoordinateSystem (1.0);
+  viewer->initCameraParameters ();
+  return (viewer);
+}
+
+
+
+unsigned int text_id = 0;
+void keyboardEventOccurred (const pcl::visualization::KeyboardEvent &event,
+                            void* viewer_void)
+{
+  boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer = *static_cast<boost::shared_ptr<pcl::visualization::PCLVisualizer> *> (viewer_void);
+  if (event.getKeySym () == "r" && event.keyDown ())
+  {
+    std::cout << "r was pressed => removing all text" << std::endl;
+
+    char str[512];
+    for (unsigned int i = 0; i < text_id; ++i)
+    {
+      sprintf (str, "text#%03d", i);
+      viewer->removeShape (str);
+    }
+    text_id = 0;
+  }
+}
+
+void mouseEventOccurred (const pcl::visualization::MouseEvent &event,
+                         void* viewer_void)
+{
+  boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer = *static_cast<boost::shared_ptr<pcl::visualization::PCLVisualizer> *> (viewer_void);
+  if (event.getButton () == pcl::visualization::MouseEvent::LeftButton &&
+      event.getType () == pcl::visualization::MouseEvent::MouseButtonRelease)
+  {
+    std::cout << "Left mouse button released at position (" << event.getX () << ", " << event.getY () << ")" << std::endl;
+
+    char str[512];
+    sprintf (str, "text#%03d", text_id ++);
+    viewer->addText ("clicked here", event.getX (), event.getY (), str);
+  }
+}
+
+
+
 int main(int argc, char **argv){
     char function = argv[1][0];
     if (function == 'p'){
@@ -160,9 +218,27 @@ int main(int argc, char **argv){
     }
     
     if (function == 'v'){
-        cout << "viewer" << endl;
-    }
-    
-  return (0);
+        std::cout << "RGB colour visualisation example\n";
+
+
+  // ------------------------------------
+  // -----Create example point cloud-----
+  // ------------------------------------
+  pcl::PointCloud<pcl::PointXYZRGB>::Ptr point_cloud_ptr (new pcl::PointCloud<pcl::PointXYZRGB>);
+    pcl::io::loadPCDFile (argv[2], *point_cloud_ptr);
+
+  boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer;
+
+    viewer = rgbVis(point_cloud_ptr);
+
+  //--------------------
+  // -----Main loop-----
+  //--------------------
+  while (!viewer->wasStopped ())
+  {
+    viewer->spinOnce (100);
+    boost::this_thread::sleep (boost::posix_time::microseconds (100000));
+  }
+  }
 }
 
