@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
+import os
 
 filename = ""
 root = Tk()
@@ -45,7 +46,7 @@ ttk.Label(mainframe, text="").grid(column=3, row=7, sticky=W)
 ttk.Label(mainframe, text="").grid(column=4, row=7, sticky=W)
 
 def disparity():
-
+    os.system("./library disparity I1_000055.pgm I2_000055.pgm")       #KRISTEN HARDCODED IN FILENAME FOR LEFT, THEN RIGHT
     print('Disparity!')
 
 
@@ -54,15 +55,24 @@ b = ttk.Button(mainframe, text="Disparity", command=disparity)
 b.grid(column=3, row=8, sticky=E)
 
 def pointCloud():
-
+    global focalLength
+    global baseline
+    global principleX
+    global principleY
+    focalLength = 1216.0089
+    baseline = 357.8112
+    principleX = 672.9872 #Kristen change to be read from boxes, and image names no hardcoded
+    principleY = 265.3183
+    tempstring = "./library populate I1_000055.pgm I1_000055_disp.pgm " + str(focalLength) + ' '+   str(baseline) + ' ' + str(principleX) + ' '+  str(principleY)
+    os.system(tempstring)
     print('Point Cloud!')
 
 # point cloud button
 b2 = ttk.Button(mainframe, text="Point Cloud", command=pointCloud)
 b2.grid(column=4, row=8, sticky=S)
 
-def visualize():
-    
+def visualize(): #liz will fix this 
+    os.system("./pcl_visualizer_demo -r point_cloud.pcd")
     print('Visualize!')
 
 # visualize button
