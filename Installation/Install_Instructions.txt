@@ -1,0 +1,53 @@
+**********
+* OpenCV *
+**********
+
+Note: When installing OpenCV, it would be a good idea to install it in a folder seperate of AutoPC
+
+-----------------------------------
+Linux Instructions (Ubuntu/Debian):
+-----------------------------------
+	Note: This has been tested on Ubuntu 14.04, 10.10, 16.04 and Debian 8.00
+	
+	Step 1). Install OpenCV from OpenCV site
+		sudo apt-get autoremove libopencv-dev python-opencv
+
+	Step 2). Run install script
+		-Navigate to AutoPC/Installation folder
+		-Execute install-opencv.sh using bash
+			bash install-opencv.sh
+
+	(Correctly cite the creator of the install-opencv.sh script here. Website: milq.github.io/install-opencv-ubuntu-debian/
+
+---------------------------
+Linux Instructions (Other):
+---------------------------
+	Step 1). Clone the OpenCV git repository
+		git clone https://github.com/opencv/opencv.git
+	
+	Step 2). Launch a web browser and navigate to docs.opencv.org/trunk/d7/d9f/tutorial_linux_install.html
+
+	Step 3). Follow the instructions under "Building OpenCV from Source Using CMake" on the website
+
+---------------------
+Mac OSX Instructions:
+---------------------
+IDK
+
+
+*******
+* PCL *
+*******
+
+-------------------
+Linux Instructions:
+-------------------
+	Step 1). Launch a web browser and navigate to pointclouds.org/downloads/linux.html
+	
+	Step 2). Locate your version of Linux and follow the instructions listed to install PCL
+
+---------------------
+Mac OSX Instructions:
+---------------------	
+	Step 1). Launch a web browser and navigate to pointclouds.org/downloads/macosx.html
+
