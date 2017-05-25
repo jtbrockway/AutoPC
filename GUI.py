@@ -22,21 +22,27 @@ ttk.Label(mainframe, text="").grid(column=4, row=2, sticky=W)
 ttk.Label(mainframe, text="Focal Length").grid(column=2, row=3)
 ttk.Entry(mainframe, text='', textvariable=focalLength, width=8).grid(column=3, row=3)
 
-principle = StringVar(root)
+principleX = StringVar(root)
 
-# text field to enter principle
-ttk.Label(mainframe, text="Principle").grid(column=2, row=4)
-ttk.Entry(mainframe, text='', textvariable=principle, width=8).grid(column=3, row=4)
+# text field to enter principle x
+ttk.Label(mainframe, text="Principle X").grid(column=2, row=4)
+ttk.Entry(mainframe, text='', textvariable=principleX, width=8).grid(column=3, row=4)
+
+principleY = StringVar(root)
+
+# text field to enter principle y
+ttk.Label(mainframe, text="Principle Y").grid(column=2, row=5)
+ttk.Entry(mainframe, text='', textvariable=principleY, width=8).grid(column=3, row=5)
 
 baseline = StringVar(root)
 
 # text field to enter baseline
-ttk.Label(mainframe, text="Baseline").grid(column=2, row=5)
-ttk.Entry(mainframe, text='', textvariable=baseline, width=8).grid(column=3, row=5)
+ttk.Label(mainframe, text="Baseline").grid(column=2, row=6)
+ttk.Entry(mainframe, text='', textvariable=baseline, width=8).grid(column=3, row=6)
 
-ttk.Label(mainframe, text="").grid(column=2, row=6, sticky=W)
-ttk.Label(mainframe, text="").grid(column=3, row=6, sticky=W)
-ttk.Label(mainframe, text="").grid(column=4, row=6, sticky=W)
+ttk.Label(mainframe, text="").grid(column=2, row=7, sticky=W)
+ttk.Label(mainframe, text="").grid(column=3, row=7, sticky=W)
+ttk.Label(mainframe, text="").grid(column=4, row=7, sticky=W)
 
 def disparity():
 
@@ -45,7 +51,7 @@ def disparity():
 
 # disparity button
 b = ttk.Button(mainframe, text="Disparity", command=disparity)
-b.grid(column=3, row=7, sticky=E)
+b.grid(column=3, row=8, sticky=E)
 
 def pointCloud():
 
@@ -53,7 +59,7 @@ def pointCloud():
 
 # point cloud button
 b2 = ttk.Button(mainframe, text="Point Cloud", command=pointCloud)
-b2.grid(column=4, row=7, sticky=S)
+b2.grid(column=4, row=8, sticky=S)
 
 def visualize():
     
@@ -61,7 +67,7 @@ def visualize():
 
 # visualize button
 b3 = ttk.Button(mainframe, text="Visualize", command=visualize)
-b3.grid(column=5, row=7, sticky=W)
+b3.grid(column=5, row=8, sticky=W)
 
 def browseFiles():
         global filename
