@@ -62,7 +62,7 @@ def pointCloud():
     global principleY
 
     tempstring = "./library populate {}.format(leftFilePath) {}.format(rightFilePath) " + focalLength.get() + ' '+   baseline.get() + ' ' + principleX.get() + ' '+  principleY.get()
-    # os.system(tempstring)
+    os.system(tempstring)
     print(tempstring)
     print('Point Cloud!')
 
