@@ -3,7 +3,8 @@ from tkinter import ttk
 from tkinter import filedialog
 import os
 
-filename = ""
+leftFilePath = ""
+rightFilePath = ""
 root = Tk()
 root.title("AutoPC")
 
@@ -15,61 +16,59 @@ mainframe.rowconfigure(0, weight=1)
 
 focalLength = StringVar(root)
 
-ttk.Label(mainframe, text="").grid(column=2, row=2, sticky=W)
-ttk.Label(mainframe, text="").grid(column=3, row=2, sticky=W)
-ttk.Label(mainframe, text="").grid(column=4, row=2, sticky=W)
+ttk.Label(mainframe, text="").grid(column=2, row=3, sticky=W)
+ttk.Label(mainframe, text="").grid(column=3, row=3, sticky=W)
+ttk.Label(mainframe, text="").grid(column=4, row=3, sticky=W)
 
 # text field to enter focal length
-ttk.Label(mainframe, text="Focal Length").grid(column=2, row=3)
-ttk.Entry(mainframe, text='', textvariable=focalLength, width=8).grid(column=3, row=3)
+ttk.Label(mainframe, text="Focal Length").grid(column=2, row=4)
+ttk.Entry(mainframe, text='', textvariable=focalLength, width=8).grid(column=3, row=4)
 
 principleX = StringVar(root)
 
 # text field to enter principle x
-ttk.Label(mainframe, text="Principle X").grid(column=2, row=4)
-ttk.Entry(mainframe, text='', textvariable=principleX, width=8).grid(column=3, row=4)
+ttk.Label(mainframe, text="Principle X").grid(column=2, row=5)
+ttk.Entry(mainframe, text='', textvariable=principleX, width=8).grid(column=3, row=5)
 
 principleY = StringVar(root)
 
 # text field to enter principle y
-ttk.Label(mainframe, text="Principle Y").grid(column=2, row=5)
-ttk.Entry(mainframe, text='', textvariable=principleY, width=8).grid(column=3, row=5)
+ttk.Label(mainframe, text="Principle Y").grid(column=2, row=6)
+ttk.Entry(mainframe, text='', textvariable=principleY, width=8).grid(column=3, row=6)
 
 baseline = StringVar(root)
 
 # text field to enter baseline
-ttk.Label(mainframe, text="Baseline").grid(column=2, row=6)
-ttk.Entry(mainframe, text='', textvariable=baseline, width=8).grid(column=3, row=6)
+ttk.Label(mainframe, text="Baseline").grid(column=2, row=7)
+ttk.Entry(mainframe, text='', textvariable=baseline, width=8).grid(column=3, row=7)
 
-ttk.Label(mainframe, text="").grid(column=2, row=7, sticky=W)
-ttk.Label(mainframe, text="").grid(column=3, row=7, sticky=W)
-ttk.Label(mainframe, text="").grid(column=4, row=7, sticky=W)
+ttk.Label(mainframe, text="").grid(column=2, row=8, sticky=W)
+ttk.Label(mainframe, text="").grid(column=3, row=8, sticky=W)
+ttk.Label(mainframe, text="").grid(column=4, row=8, sticky=W)
 
 def disparity():
-    os.system("./library disparity I1_000055.pgm I2_000055.pgm")       #KRISTEN HARDCODED IN FILENAME FOR LEFT, THEN RIGHT
+    os.system("./library disparity {}.format(leftFilePath) {}.format(rightFilePath)")       #KRISTEN HARDCODED IN FILENAME FOR LEFT, THEN RIGHT
     print('Disparity!')
 
 
 # disparity button
 b = ttk.Button(mainframe, text="Disparity", command=disparity)
-b.grid(column=3, row=8, sticky=E)
+b.grid(column=3, row=9, sticky=E)
 
 def pointCloud():
     global focalLength
     global baseline
     global principleX
     global principleY
-    focalLength = 1216.0089
-    baseline = 357.8112
-    principleX = 672.9872 #Kristen change to be read from boxes, and image names no hardcoded
-    principleY = 265.3183
-    tempstring = "./library populate I1_000055.pgm I1_000055_disp.pgm " + str(focalLength) + ' '+   str(baseline) + ' ' + str(principleX) + ' '+  str(principleY)
-    os.system(tempstring)
+
+    tempstring = "./library populate {}.format(leftFilePath) {}.format(rightFilePath) " + focalLength.get() + ' '+   baseline.get() + ' ' + principleX.get() + ' '+  principleY.get()
+    # os.system(tempstring)
+    print(tempstring)
     print('Point Cloud!')
 
 # point cloud button
 b2 = ttk.Button(mainframe, text="Point Cloud", command=pointCloud)
-b2.grid(column=4, row=8, sticky=S)
+b2.grid(column=4, row=9, sticky=S)
 
 def visualize(): #liz will fix this 
     os.system("./pcl_visualizer_demo -r point_cloud.pcd")
@@ -77,21 +76,30 @@ def visualize(): #liz will fix this
 
 # visualize button
 b3 = ttk.Button(mainframe, text="Visualize", command=visualize)
-b3.grid(column=5, row=8, sticky=W)
+b3.grid(column=5, row=9, sticky=W)
 
-def browseFiles():
-        global filename
-        filename = filedialog.askopenfilename()
-        pathlabel.config(text=filename)
+def browseLeft():
+    global leftFilePath
+    leftFilePath = filedialog.askopenfilename()
+    pathLeftLabel.config(text=os.path.basename(leftFilePath))
 
-pathlabel = Label(root)
+pathLeftLabel = Label(root)
+# pathLeftLabel.grid(column=3, row=2, sticky=W)
+
+def browseRight():
+    global rightFilePath
+    rightFilePath = filedialog.askopenfilename()
+    pathRightLabel.config(text=os.path.basename(rightFilePath))
+
+pathRightLabel = Label(root)
+# pathRightLabel.grid(column=5, row=2, sticky=W)
 
 # left image button button
-b4 = ttk.Button(mainframe, text="Upload Left Image", command=browseFiles)
-b4.grid(column=3, row=1) #sticky=E)
+b4 = ttk.Button(mainframe, text="Upload Left Image", command=browseLeft)
+b4.grid(column=3, row=1)
 
 # right image button button
-b5 = ttk.Button(mainframe, text="Upload Right Image", command=browseFiles)
-b5.grid(column=5, row=1) #sticky=W)
+b5 = ttk.Button(mainframe, text="Upload Right Image", command=browseRight)
+b5.grid(column=5, row=1)
 
 root.mainloop()
