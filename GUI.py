@@ -71,7 +71,7 @@ b2 = ttk.Button(mainframe, text="Point Cloud", command=pointCloud)
 b2.grid(column=4, row=9, sticky=S)
 
 def visualize(): #liz will fix this 
-    os.system("#!./pcl_visualizer_demo -r point_cloud.pcd")
+    os.system("#!./library visualize point_cloud.pcd")
     print('Visualize!')
 
 # visualize button
