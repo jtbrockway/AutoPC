@@ -151,14 +151,14 @@ b6.grid(column=3, row=10, sticky=E)
 def sample2():
     global enterFlag
     enterFlag = True
-    global focalLength 
-    focalLength = 1216.001
-    global principleX 
-    principleX = 672.99
-    global principleY 
-    principleY = 265.32
-    global baseline 
-    baseline = 357.8
+    global focal 
+    focal = 1216.001
+    global prinX 
+    prinX = 672.99
+    global prinY 
+    prinY = 265.32
+    global base 
+    base = 357.8
 
     global leftFilePath 
     leftFilePath = 'samples/I1_000080.pgm'
@@ -177,14 +177,14 @@ b7.grid(column=4, row=10, sticky=E)
 def sample3():
     global enterFlag
     enterFlag = True
-    global focalLength 
-    focalLength = 1216.001
-    global principleX 
-    principleX = 672.99
-    global principleY 
-    principleY = 265.32
-    global baseline 
-    baseline = 357.8
+    global focal 
+    focal = 1216.001
+    global prinX 
+    prinX = 672.99
+    global prinY 
+    prinY = 265.32
+    global base 
+    base = 357.8
 
     global leftFilePath 
     leftFilePath = 'samples/I1_000879.pgm'
