@@ -13,7 +13,7 @@ Linux Instructions:
 
 	Step 4). Navigate to the folder you downloaded the file in step 3 to using Terminal
 
-	Step 5). Execute the .sh file
+	Step 5). Execute the .sh file. In terminal type
 		bash cmake-3.8.1-Linux-x86_64.sh
 	
 Please note: The terminal command in Step 5 assumes you are using Ubuntu. If you are using a different Linux distrubution, 
@@ -32,6 +32,7 @@ Mac OSX Instructions:
 
 	Step 5). Execute the file you downloaded in step 3
 		If using a visual file system, you can simply single click the .dmg file twice
+
 
 **********
 * OpenCV *
@@ -52,7 +53,7 @@ Linux Instructions (Ubuntu/Debian):
 		-Execute install-opencv.sh using bash
 			bash install-opencv.sh
 
-	(Correctly cite the creator of the install-opencv.sh script here. Website: milq.github.io/install-opencv-ubuntu-debian/
+	(Bash install script from by milq.github.io/install-opencv-ubuntu-debian/)
 
 ---------------------------
 Linux Instructions (Other):
@@ -67,8 +68,9 @@ Linux Instructions (Other):
 ---------------------
 Mac OSX Instructions:
 ---------------------
-IDK
+	Step 1). Launch a web browser and navigate to www.pyimagesearch.com/2015/06/15/install-opencv-3-0-and-python-2-7-on-osx/
 
+	Step 2). Follow steps 1 through 9 to successfully install OpenCV
 
 *******
 * PCL *
@@ -84,5 +86,13 @@ Linux Instructions:
 ---------------------
 Mac OSX Instructions:
 ---------------------	
-	Step 1). Launch a web browser and navigate to pointclouds.org/downloads/macosx.html
+	Please note: These instructions assume you have homebrew installed. 
+	If you do not have homebrew, please follow the instructions located at brew.sh under the "Install Homebrew" section
 
+	Step 1). Update Homebrew. In terminal type
+		brew update
+		brew tap homebrew/science
+
+	Step 2). Install PCL. In terminal type
+		brew install pcl
+		
