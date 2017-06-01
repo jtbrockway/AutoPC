@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
 import os
+import subprocess
 
 leftFilePath = ""
 rightFilePath = ""
@@ -47,7 +48,10 @@ ttk.Label(mainframe, text="").grid(column=3, row=8, sticky=W)
 ttk.Label(mainframe, text="").grid(column=4, row=8, sticky=W)
 
 def disparity():
-    os.system("#!./library disparity {}.format(leftFilePath) {}.format(rightFilePath)")       #KRISTEN HARDCODED IN FILENAME FOR LEFT, THEN RIGHT
+    print(leftFilePath)
+    print(rightFilePath)
+#os.system("#!./library disparity {}.format(leftFilePath) {}.format(rightFilePath)")       #KRISTEN HARDCODED IN FILENAME FOR LEFT, THEN RIGHT
+    subprocess.call(["./library", "disparity", leftFilePath, rightFilePath])
     print('Disparity!')
 
 
@@ -61,9 +65,7 @@ def pointCloud():
     global principleX
     global principleY
 
-    tempstring = "#!./library populate {}.format(leftFilePath) {}.format(rightFilePath) " + focalLength.get() + ' '+   baseline.get() + ' ' + principleX.get() + ' '+  principleY.get()
-    os.system(tempstring)
-    print(tempstring)
+    subprocess.call(["./library", "populate", leftFilePath, rightFilePath, focalLength.get(), baseline.get(), principleX.get(), principleY.get()])
     print('Point Cloud!')
 
 # point cloud button
@@ -71,7 +73,7 @@ b2 = ttk.Button(mainframe, text="Point Cloud", command=pointCloud)
 b2.grid(column=4, row=9, sticky=S)
 
 def visualize(): #liz will fix this 
-    os.system("#!./library visualize point_cloud.pcd")
+    subprocess.call(["./library", "visualize", "point_cloud.pcd"])
     print('Visualize!')
 
 # visualize button
