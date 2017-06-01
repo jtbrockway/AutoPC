@@ -8,6 +8,11 @@ leftFilePath = ""
 rightFilePath = ""
 root = Tk()
 root.title("AutoPC")
+focal = 0.0
+prinX = 0.0
+prinY = 0.0
+base = 0.0
+enterFlag = False #To be used if entering from Samples
 
 # set up framework
 mainframe = ttk.Frame(root, padding="30 30 80 80")
@@ -48,9 +53,6 @@ ttk.Label(mainframe, text="").grid(column=3, row=8, sticky=W)
 ttk.Label(mainframe, text="").grid(column=4, row=8, sticky=W)
 
 def disparity():
-    print(leftFilePath)
-    print(rightFilePath)
-#os.system("#!./library disparity {}.format(leftFilePath) {}.format(rightFilePath)")       #KRISTEN HARDCODED IN FILENAME FOR LEFT, THEN RIGHT
     subprocess.call(["./library", "disparity", leftFilePath, rightFilePath])
     print('Disparity!')
 
@@ -60,15 +62,22 @@ b = ttk.Button(mainframe, text="Disparity", command=disparity)
 b.grid(column=3, row=9, sticky=E)
 
 def pointCloud():
-    global focalLength
-    global baseline
-    global principleX
-    global principleY
+    global enterFlag
+    global focal
+    global base
+    global prinX
+    global prinY
+    if (not enterFlag):
+        focal = focalLength.get()
+        base = baseline.get()
+        prinX = principleX.get()
+        prinY = principleY.get()
 
     temppath = leftFilePath[:-4] + '_disp.pgm'
 
-    subprocess.call(["./library", "populate", leftFilePath, temppath, focalLength.get(), baseline.get(), principleX.get(), principleY.get()])
+    subprocess.call(["./library", "populate", leftFilePath, temppath, str(focal), str(base), str(prinX), str(prinY)])
     print('Point Cloud!')
+    enterFlag = False
 
 # point cloud button
 b2 = ttk.Button(mainframe, text="Point Cloud", command=pointCloud)
@@ -113,20 +122,22 @@ ttk.Label(mainframe, text="").grid(column=1, row=11, sticky=W)
 ttk.Label(mainframe, text="").grid(column=2, row=11, sticky=W)
 ttk.Label(mainframe, text="").grid(column=3, row=11, sticky=W)
 
-def sample1():  
-    global focalLength 
-    focalLength = 1216.001
-    global principleX 
-    principleX = 672.99
-    global principleY 
-    principleY = 265.32
-    global baseline 
-    baseline = 357.8
+def sample1(): 
+    global enterFlag
+    enterFlag = True
+    global focal
+    focal = 1216.001
+    global prinX 
+    prinX = 672.99
+    global prinY 
+    prinY = 265.32
+    global base 
+    base = 357.8
 
     global leftFilePath 
-    leftFilePath = 'I1_000050.pgm'
+    leftFilePath = 'samples/I1_000055.pgm'
     global rightFilePath 
-    rightFilePath = 'I2_000050.pgm'
+    rightFilePath = 'samples/I2_000055.pgm'
 
     disparity()
     pointCloud()
@@ -138,7 +149,8 @@ b6 = ttk.Button(mainframe, text="Sample 1", command=sample1)
 b6.grid(column=3, row=10, sticky=E)
 
 def sample2():
-
+    global enterFlag
+    enterFlag = True
     global focalLength 
     focalLength = 1216.001
     global principleX 
@@ -149,9 +161,9 @@ def sample2():
     baseline = 357.8
 
     global leftFilePath 
-    leftFilePath = 'I1_000080.pgm'
+    leftFilePath = 'samples/I1_000080.pgm'
     global rightFilePath 
-    rightFilePath = 'I2_000080.pgm'
+    rightFilePath = 'samples/I2_000080.pgm'
 
     disparity()
     pointCloud()
@@ -163,7 +175,8 @@ b7 = ttk.Button(mainframe, text="Sample 2", command=sample2)
 b7.grid(column=4, row=10, sticky=E)
 
 def sample3():
-
+    global enterFlag
+    enterFlag = True
     global focalLength 
     focalLength = 1216.001
     global principleX 
@@ -174,9 +187,9 @@ def sample3():
     baseline = 357.8
 
     global leftFilePath 
-    leftFilePath = 'I1_000879.pgm'
+    leftFilePath = 'samples/I1_000879.pgm'
     global rightFilePath 
-    rightFilePath = 'I1_000879.pgm'
+    rightFilePath = 'samples/I1_000879.pgm'
 
     disparity()
     pointCloud()

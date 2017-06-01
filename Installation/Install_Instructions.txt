@@ -68,9 +68,9 @@ Linux Instructions (Other):
 ---------------------
 Mac OSX Instructions:
 ---------------------
-	Step 1). Launch a web browser and navigate to www.pyimagesearch.com/2015/06/15/install-opencv-3-0-and-python-2-7-on-osx/
+	Step 1). Launch a web browser and navigate to www.pyimagesearch.com/2016/12/19/install-opencv-3-on-macos-with-homebrew-the-easy-way/
 
-	Step 2). Follow steps 1 through 9 to successfully install OpenCV
+	Step 2). Follow steps 1 through 7 to successfully install OpenCV
 
 *******
 * PCL *
