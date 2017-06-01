@@ -65,7 +65,9 @@ def pointCloud():
     global principleX
     global principleY
 
-    subprocess.call(["./library", "populate", leftFilePath, rightFilePath, focalLength.get(), baseline.get(), principleX.get(), principleY.get()])
+    temppath = leftFilePath[:-4] + '_disp.pgm'
+
+    subprocess.call(["./library", "populate", leftFilePath, temppath, focalLength.get(), baseline.get(), principleX.get(), principleY.get()])
     print('Point Cloud!')
 
 # point cloud button
@@ -103,5 +105,105 @@ b4.grid(column=3, row=1)
 # right image button button
 b5 = ttk.Button(mainframe, text="Upload Right Image", command=browseRight)
 b5.grid(column=5, row=1)
+
+ttk.Label(mainframe, text="").grid(column=1, row=10, sticky=W)
+ttk.Label(mainframe, text="").grid(column=2, row=10, sticky=W)
+ttk.Label(mainframe, text="").grid(column=3, row=10, sticky=W)
+ttk.Label(mainframe, text="").grid(column=1, row=11, sticky=W)
+ttk.Label(mainframe, text="").grid(column=2, row=11, sticky=W)
+ttk.Label(mainframe, text="").grid(column=3, row=11, sticky=W)
+
+def sample1():  
+    global focalLength 
+    focalLength = 1216.001
+    global principleX 
+    principleX = 672.99
+    global principleY 
+    principleY = 265.32
+    global baseline 
+    baseline = 357.8
+
+    global leftFilePath 
+    leftFilePath = 'I1_000050.pgm'
+    global rightFilePath 
+    rightFilePath = 'I2_000050.pgm'
+
+    disparity()
+    pointCloud()
+    visualize()
+    print('Sample 1!')
+
+# sample 1 button
+b6 = ttk.Button(mainframe, text="Sample 1", command=sample1)
+b6.grid(column=3, row=10, sticky=E)
+
+def sample2():
+
+    global focalLength 
+    focalLength = 1216.001
+    global principleX 
+    principleX = 672.99
+    global principleY 
+    principleY = 265.32
+    global baseline 
+    baseline = 357.8
+
+    global leftFilePath 
+    leftFilePath = 'I1_000080.pgm'
+    global rightFilePath 
+    rightFilePath = 'I2_000080.pgm'
+
+    disparity()
+    pointCloud()
+    visualize()
+    print('Sample 2!')
+
+# sample 2 button
+b7 = ttk.Button(mainframe, text="Sample 2", command=sample2)
+b7.grid(column=4, row=10, sticky=E)
+
+def sample3():
+
+    global focalLength 
+    focalLength = 1216.001
+    global principleX 
+    principleX = 672.99
+    global principleY 
+    principleY = 265.32
+    global baseline 
+    baseline = 357.8
+
+    global leftFilePath 
+    leftFilePath = 'I1_000879.pgm'
+    global rightFilePath 
+    rightFilePath = 'I1_000879.pgm'
+
+    disparity()
+    pointCloud()
+    visualize()
+    print('Sample 3!')
+
+# sample 3 button
+b8 = ttk.Button(mainframe, text="Sample 3", command=sample3)
+b8.grid(column=3, row=11, sticky=E)
+
+# def sample4():
+
+#     focalLength = '1216.001'
+#     principleX = '672.99'
+#     principleY = '265.32'
+#     baseline = '357.8'
+
+#     leftFilePath = ''
+#     rightFilePath = ''
+
+#     disparity()
+#     pointCloud()
+#     visualize()
+#     print('Sample 4!')
+
+# # sample 4 button
+# b9 = ttk.Button(mainframe, text="Sample 4", command=sample4)
+# b9.grid(column=4, row=11, sticky=E)
 
 root.mainloop()
