@@ -15,6 +15,7 @@
 #include "elas.h"
 #include "image.h"
 #include <pcl/console/parse.h>
+
 #include <boost/thread/thread.hpp>\
 
 
