@@ -27,16 +27,23 @@ To succesfully create and visualize a point cloud using our GUI, please follow t
 	
 	*OPTIONAL*
 		There are included examples that are meant to show off the funcitonality of our project.
-		If you would like to view these examples simply click the button of the GUI
+		If you would like to view these examples simply click the button on the GUI:
 			-Sample # (where # is whichever sample you would like to view)
 
 -Creating the Disparity Image
 	Step 3). Left click on the "Upload Left Image" button to select your left image.
 
 	Step 4). Left click on the "Upload Right Image" button to select your right image.
-		Note: The images from step 3 and 4 must be stereo pairs.
+		Note: The images from step 3 and 4 must be a rectified stereo pair.
 
 	Step 5). Click the "Disparity" button to create the disparity image.
+
+		Note: If you would like to use the included samples, when uploading either image, 
+			navigate to "AutoPC/samples" and select the image you would like to use.
+			When selected the other image, be sure you select the correct pair.
+		Example: 
+			-Left Image: AutoPC/samples/I1_000055.pgm
+			-Right Image: AutoPC/samples/I2_000055.pgm
 
 -Creating the Point Cloud
 	Please note: Our GUI will select the correct disparity image to be used when creating the point cloud
@@ -89,4 +96,11 @@ Note: After successfully creating the Point cloud, the point cloud will be saved
 		./library visualize path/to/point_cloud
 
 	where path/to/point_cloud is the path to the point cloud that you would like to visualize.
-	
+
+***************************
+* Controls for Visualiser *
+***************************
+
+-Zoom In: Double finger scroll down
+-Zoom Out: Double finger scroll up
+-Rotate Camera: Single click and drag mouse
