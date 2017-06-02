@@ -27,6 +27,15 @@ Please note:
 **************************
 	For help using the product, please read the "Tutorial.txt" file
 
+****************
+* Dependencies *
+****************
+	This project requires that you have installed:
+		-Python 3
+		-CMake
+		-OpenCV
+		-Point Cloud Library
+
 *****************
 * How to Extend *
 *****************
@@ -36,8 +45,11 @@ Please note:
 		Step 2). Open library.C with the text editor of your choice
 
 		Step 3). Create the function that you would like to add
+			Please note: To recieve input from terminal your function should take in argc and argv
 
 		Step 4). Navigate to the main function and follow the example code to be able to call your new function from the main function
+			Please note: We use a single character to call functions.
+				When you are adding your function call to main, make sure you do not collide with the other characters used to call other functions.
 
 		Step 5). Recompile using:
 			-cmake .
@@ -46,11 +58,3 @@ Please note:
 	You can now call your function using ./library <your_function> <parameters>
 
 
-****************
-* Dependencies *
-****************
-	This project requires that you have installed:
-		-Python 3
-		-CMake
-		-OpenCV
-		-Point Cloud Library
