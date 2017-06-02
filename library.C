@@ -210,10 +210,16 @@ void mouseEventOccurred (const pcl::visualization::MouseEvent &event,
 
 int main(int argc, char **argv){
     char function = argv[1][0];
-    if (function == 'p'){
+/*Example for how to add your function
+   if (function == 'p'){
+        yourFunction(argc, argv);
+    }
+*/
+    
+   if (function == 'p'){
         populate(argc, argv);
     }
-    
+
     if (function == 'd'){
         process(argv[2], argv[3]);
     }

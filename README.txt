@@ -12,6 +12,7 @@ This product also has the ability to be ran purely from the terminal.
 
 Please note:
 	The GUI is best used if you are meaning to generate and visualize a single point cloud. 
+		If you would like to generate more point clouds, please use the command line functionality
 
 	We have also included a set of rectified stereo pairs to be used if you would like to sample the product.
 		These are located in the "samples" folder.
