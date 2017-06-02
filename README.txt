@@ -51,11 +51,26 @@ Please note:
 		Step 4). Navigate to the main function and follow the example code to be able to call your new function from the main function
 			Please note: We use a single character to call functions.
 				When you are adding your function call to main, make sure you do not collide with the other characters used to call other functions.
+		Step 5). Save the library.C file and exit
 
-		Step 5). Recompile using:
+		Step 6). Recompile using:
 			-cmake .
 			-make
 	
 	You can now call your function using ./library <your_function> <parameters>
 
+	To extend the GUI:
+		Please note: This should be done after adding your new function and recompiling library.
 
+		Step 1). Locate the GUI.py file in the AutoPC folder
+
+		Step 2). Open GUI.py with the text editor of your choice
+
+		Step 3). Follow the example to:
+			-Create a new button in the GUI that will be used to call your function
+			-Add any extra input boxes to your function
+			-Create a function that will be called when your button is pressed
+
+		Step 4). Save the GUI.py file and exit
+
+	You have now extended the GUI to be able to use your new function
