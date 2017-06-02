@@ -66,7 +66,7 @@ Please note:
 
 		Step 2). Open GUI.py with the text editor of your choice
 
-		Step 3). Follow the example to:
+		Step 3). Follow the example at the bottom of the file to:
 			-Create a new button in the GUI that will be used to call your function
 			-Add any extra input boxes to your function
 			-Create a function that will be called when your button is pressed

@@ -214,3 +214,29 @@ b8 = ttk.Button(mainframe, text="Sample 3", command=sample3)
 b8.grid(column=5, row=11, sticky=W)
 
 root.mainloop()
+
+'''
+GUI Extension Example:
+
+To create the button:
+	yourButton = ttk.Button(mainframe, text="yourButton", command=yourFunction)
+	yourButton.grid(column=6, row=11, sticky=W)
+		Please note: It does not make a difference where your button is located, but try to put it somewhere were others arent
+	
+To create additional text fields:
+	yourVar = StringVar(root)
+	ttk.Label(mainframe, text="yourTextField").grid(column=6, row=12)
+	ttk.Entry(mainframe, text='', textvariable=yourVar, width=8).grid(column=6, row=11)
+
+To create your function:
+	yourFunction():
+		var = yourVar.get()     <--- This gets any text from your text field
+		***
+		Do other things here
+		***
+
+    	subprocess.call(["./library", "characterUsedToCallYourFunctionIn_library.C", <your>, <function>, <arguments>])
+			***
+			The above line of code calls the function you created in library.C
+			***
+'''
