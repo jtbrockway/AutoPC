@@ -1,0 +1,92 @@
+Please note: You must compile before attempting to use the GUI or the terminal functionality.
+
+***********
+* Compile *
+*********** 
+	Step 1). Launch a terminal and navigate to the "AutoPC" folder
+	
+	Step 2). Execute the command:
+		cmake .
+
+	Step 3). Execute the command:
+		make
+	
+	Note: These commands may require superuser privelages to run. If this is the case try using (For Mac OSX and Ubuntu):
+		sudo cmake .
+		sudo make
+
+*******
+* GUI *
+*******
+To succesfully create and visualize a point cloud using our GUI, please follow the steps in the order they are laid out
+
+	Step 1). Launch a terminal and navigate to the "AutoPC" folder
+	
+	Step 2). Launch the GUI by typing into the terminal:
+		python3 GUI.py
+	
+	*OPTIONAL*
+		There are included examples that are meant to show off the funcitonality of our project.
+		If you would like to view these examples simply click the button of the GUI
+			-Sample # (where # is whichever sample you would like to view)
+
+-Creating the Disparity Image
+	Step 3). Left click on the "Upload Left Image" button to select your left image.
+
+	Step 4). Left click on the "Upload Right Image" button to select your right image.
+		Note: The images from step 3 and 4 must be stereo pairs.
+
+	Step 5). Click the "Disparity" button to create the disparity image.
+
+-Creating the Point Cloud
+	Please note: Our GUI will select the correct disparity image to be used when creating the point cloud
+
+	Step 6). Enter into the "Focal Length" text field the number that corresponds to the Focal Length of the camera that was used to take the stereo pair images.
+	
+	Step 7). Enter into the "Principle X" text field the number that corresponds to the Principle Point X component of the camera that was used to take the stereo pair images.
+
+	Step 8). Enter into the "Principle Y" text field the number that corresponds to the Principle Point Y component of the camera that was used to take the stereo pair images.
+
+	Step 9). Enter into the "Baseline" text field the number that corresponds to the Baseline of the camera that was used to take the stereo pair images.
+
+	Step 10). Click the "Point Cloud" button to create the point cloud
+
+-Visualising the point cloud
+	Step 11). Click the "Visualize" button to visualize the point cloud
+
+Note: After successfully creating the Point cloud, the point cloud will be saved in the AutoPC folder as "point_cloud.pcd". 
+
+*********************
+* Run from Terminal *
+*********************
+	Step 1). Launch terminal and navigate to the "AutoPC" folder
+
+-Creating a Disparity Image:
+	To create a disparity image simply type into terminal
+		./library disparity path/of/leftImage path/of/rightImage
+
+	where path/of/leftImage and path/of/rightImage are replaced with the path to the and left and right images of the stero pair 
+		that you would like to create a disparity image from.
+	
+	Note: Your dispairty images will be saved under path/of/leftImage_disp.pgm and path/of/rightImage_disp.pgm
+
+-Creating a Point Cloud:
+	To create a point cloud simply type into terminal
+		./library populate path/of/imageFromStereoPair path/of/correspondingDisparity focalLength baseline principleX principleY
+
+		where
+			-path/of/imageFromSteroPair is the path to a single image of a stero pair (left or right)
+			-path/of/correspondingDispairty is the path to the Disparity image corresponding to the image you chose from the stereo pair
+			-focalLength is the focal length of the camera used to take the stereo pair images
+			-baseline is the baseline of the camera used to take the stereo pair images
+			-principleX is the principle point x component of the camera used to take the stero pair images
+			-principleY is the principle point y component of the camera used to take the stero pair images
+
+	Note: By default, your point cloud will be saved as "point_cloud.pcd" in the "AutoPC" folder.
+
+-Visualing a Point Cloud:
+	To visualize a point cloud simple type into terminal
+		./library visualize path/to/point_cloud
+
+	where path/to/point_cloud is the path to the point cloud that you would like to visualize.
+	
