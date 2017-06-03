@@ -27,13 +27,15 @@ int populate(int argc, char **argv){
 		fprintf(stderr, "Enter all required parameters in order: Focal Length, Baseline, Principle point x, Principle Point y\n");
 		return 0;
 	}
+//Read in images from command line
     cv::Mat input = cv::imread(argv[2]);
 	cv::Mat disp = cv::imread(argv[3], CV_LOAD_IMAGE_GRAYSCALE);
     pcl::PointCloud<pcl::PointXYZRGB>::Ptr pc(new pcl::PointCloud<pcl::PointXYZRGB>);
-    double focal = atof(argv[4]);
-    double baseline = atof(argv[5]);
-    double cu = atof(argv[6]);
-    double cv = atof(argv[7]);
+//Read in arguments from command line
+    double focal = atof(argv[4]); //Focal length of camera
+    double baseline = atof(argv[5]); //Baseline of camera
+    double x0 = atof(argv[6]); //Principle point x of camera
+    double y0 = atof(argv[7]); //Principle point y of camera
     for(double R = 0; R< input.rows; R++){
 		for(double C = 0; C < input.cols; C++)
 		{
@@ -42,14 +44,21 @@ int populate(int argc, char **argv){
                         //if(d < 100) continue;
 			pcl::PointXYZRGB p;
                         if ( d < 3)
+								//3 is a magic number
+								//We chose this number as it creates the best result when visualizing the point cloud
+								//This number determines how much a pixel must have moved between the stereo pair to be included in the point cloud
                             continue;
-                        p.x = (-1*(C - cu )*baseline/ d);
-			p.y = (-1*(R - cv)*baseline/d);
+                        p.x = (-1*(C - x0)*baseline/ d);
+			p.y = (-1*(R - y0)*baseline/d);
                         //cout << 'x'<< p.x << endl;
                         //cout << 'y' << p.y << endl;
 			//p.z =  ((954.48426 +  1839.23599)/2) * 50/d; //25
 			
 			p.z = (focal *baseline /d) - 1500;
+				//1500 is a magic number
+				//We chose this number as it creates the best results when visualizing the point cloud
+				//This number makes the z axis component of each pixel 1500 units closer to the origin of the visualizer
+
                         //cout << focal * baseline /d << endl; 
                         cv::Vec3b bgr(input.at<cv::Vec3b>(R, C));
 			p.r = bgr[2];
