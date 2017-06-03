@@ -30,6 +30,7 @@ int populate(int argc, char **argv){
 //Read in images from command line
     cv::Mat input = cv::imread(argv[2]);
 	cv::Mat disp = cv::imread(argv[3], CV_LOAD_IMAGE_GRAYSCALE);
+//Initialize point cloud
     pcl::PointCloud<pcl::PointXYZRGB>::Ptr pc(new pcl::PointCloud<pcl::PointXYZRGB>);
 //Read in arguments from command line
     double focal = atof(argv[4]); //Focal length of camera
@@ -40,27 +41,20 @@ int populate(int argc, char **argv){
 		for(double C = 0; C < input.cols; C++)
 		{
 			double d = disp.at<uchar>(R, C);
-			//cout << d << endl;
-                        //if(d < 100) continue;
 			pcl::PointXYZRGB p;
                         if ( d < 3)
 								//3 is a magic number
 								//We chose this number as it creates the best result when visualizing the point cloud
-								//This number determines how much a pixel must have moved between the stereo pair to be included in the point cloud
+								//This number determines how much a pixel must have moved between the stereo pair to be included in the point cloud, and reduces noise
                             continue;
                         p.x = (-1*(C - x0)*baseline/ d);
 			p.y = (-1*(R - y0)*baseline/d);
-                        //cout << 'x'<< p.x << endl;
-                        //cout << 'y' << p.y << endl;
-			//p.z =  ((954.48426 +  1839.23599)/2) * 50/d; //25
 			
 			p.z = (focal *baseline /d) - 1500;
 				//1500 is a magic number
 				//We chose this number as it creates the best results when visualizing the point cloud
 				//This number makes the z axis component of each pixel 1500 units closer to the origin of the visualizer
-
-                        //cout << focal * baseline /d << endl; 
-                        cv::Vec3b bgr(input.at<cv::Vec3b>(R, C));
+            cv::Vec3b bgr(input.at<cv::Vec3b>(R, C));
 			p.r = bgr[2];
 			p.g = bgr[1];
 			p.b = bgr[0];
@@ -163,7 +157,7 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
   free(D2_data);
 }
 
-
+//allows colorized point cloud to be viewed: default PCL function
 boost::shared_ptr<pcl::visualization::PCLVisualizer> rgbVis (pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr cloud)
 {
   // --------------------------------------------
@@ -180,7 +174,7 @@ boost::shared_ptr<pcl::visualization::PCLVisualizer> rgbVis (pcl::PointCloud<pcl
 }
 
 
-
+//checks to see if keyboard was clicked: default PCL function
 unsigned int text_id = 0;
 void keyboardEventOccurred (const pcl::visualization::KeyboardEvent &event,
                             void* viewer_void)
@@ -199,7 +193,7 @@ void keyboardEventOccurred (const pcl::visualization::KeyboardEvent &event,
     text_id = 0;
   }
 }
-
+//checks to see if mouse was clicked: default PCL function
 void mouseEventOccurred (const pcl::visualization::MouseEvent &event,
                          void* viewer_void)
 {
@@ -219,8 +213,8 @@ void mouseEventOccurred (const pcl::visualization::MouseEvent &event,
 
 int main(int argc, char **argv){
     char function = argv[1][0];
-/*Example for how to add your function
-   if (function == 'p'){
+/*Example for how to add your function, argument for function cannot begin with p,d, or v
+   if (function == 'a'){                  
         yourFunction(argc, argv);
     }
 */
